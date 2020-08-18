@@ -24,7 +24,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Install SBCL
-      run: sudo apt install sbcl curl
+      run: sudo apt install sbcl curl cl-asdf
     
     - name: Install QuickLisp
       run: |
