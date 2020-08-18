@@ -1,4 +1,4 @@
-# Oop
+# CLOOP
 
 This is an educational exploration of OOP, from the perspective of using functions and closures to express encapsulation, please do not use this in production!
 
