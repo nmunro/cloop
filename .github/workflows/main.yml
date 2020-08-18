@@ -36,4 +36,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Test
-      run: sbcl --eval '(progn (load #p"/usr/share/common-lisp/source/cl-asdf/asdf.lisp")(asdf:test-system :oop)(exit))'
+      run: sbcl --load /usr/share/common-lisp/source/cl-asdf/asdf.lisp --eval "(progn (require 'asdf)(asdf:test-system :oop)(exit))"
