@@ -32,7 +32,7 @@ jobs:
        sbcl --load quicklisp.lisp --eval '(progn (quicklisp-quickstart:install) (ql:add-to-init-file) (exit))'
        
     - name: Symlink oop
-      run: ln -s $GITHUB_WORKSPACE ~/quicklisp/local-projects/cloop
+      run: mkdir -p /home/runner/quicklisp/local-projects/ && ln -s $GITHUB_WORKSPACE ~/quicklisp/local-projects/cloop
 
     # Runs a set of commands using the runners shell
     - name: Test
