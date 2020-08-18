@@ -36,4 +36,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Test
-      run: sbcl --eval '(progn (asdf:test-system :oop)(exit))'
+      run: sbcl --eval "(progn (require 'asdf)(asdf:test-system :oop)(exit))"
