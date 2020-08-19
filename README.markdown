@@ -4,7 +4,7 @@ This is an educational exploration of OOP, from the perspective of using functio
 
 ## Usage
 
-    * (let ((person1 (oop:create :name "NMunro" :age 2345 :to-string (lambda (self) (format nil "~A: ~A" (oop:get-property self :name) (oop:get-property self :age))))))
+    * (let ((person1 (oop:build :name "NMunro" :age 2345 :to-string (lambda (self) (format nil "~A: ~A" (oop:get-property self :name) (oop:get-property self :age))))))
         (oop:call person1 :to-string))
     "NMunro: 2345"
 
