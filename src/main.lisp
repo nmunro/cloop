@@ -31,7 +31,3 @@
 
 (defun call (obj f &rest args)
   (apply (apply obj `(,f)) (append `(,obj) args)))
-
-(let* ((p1 (build :name "NMunro" :age 2345 :hi (lambda (self) (format nil "Hello world!~%"))))
-       (p2 (extend p1 :name "Bob" :age 18)))
-  (format nil "~A inherits from ~A~%" (get-property p2 :name) (get-property (call p2 :super) :name)))
