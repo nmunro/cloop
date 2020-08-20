@@ -62,21 +62,27 @@
 (deftest test-inheritence-2
   (testing "Object can shadow property names"
     (let* ((person1 (build :name "Gary" :age 24))
-          (person2 (extend person1 :name "Bob")))
+           (person2 (extend person1 :name "Bob")))
       (ok (string= "Bob" (get-property person2 :name))))))
 
 (deftest test-inheritence-3
   (testing "Object can expose its parent"
     (let* ((o1 (build :name "NMunro" :age 33 :can-vote (lambda (this) (>= (get-property this :age) 18))))
-       (o2 (extend o1 :name "Gary" :greeting "Hello!" :say-hi (lambda (this) (format nil "~A" (get-property this :greeting))))))
-    (ok (string= (get-property (call o2 :super) :name) "NMunro")))))
+           (o2 (extend o1 :name "Gary" :greeting "Hello!" :say-hi (lambda (this) (format nil "~A" (get-property this :greeting))))))
+    (ok (string= (get-property (super o2) :name) "NMunro")))))
 
 (deftest test-methods-1
   (testing "Methods can be used via apply"
-    (let* ((person (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18)))))
+    (let ((person (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18)))))
       (ok (apply (get-property person :can-vote) `(,person))))))
 
 (deftest test-methods-2
   (testing "Methods can be used via 'call'"
-    (let* ((person (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18)))))
+    (let ((person (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18)))))
       (ok (call person :can-vote)))))
+
+(deftest test-methods-3
+  (testing "Methods on the 'super' can be used via 'call'"
+           (let* ((p1 (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18))))
+                  (p2 (extend p1 :name "Bob" :age 17)))
+      (ok (and (eq t (call (super p2) :can-vote)) (eq nil (call p2 :can-vote)))))))

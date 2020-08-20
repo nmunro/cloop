@@ -2,6 +2,7 @@
   (:use :cl)
   (:export #:build
            #:extend
+           #:super
            #:get-property
            #:set-property
            #:call))
@@ -14,7 +15,7 @@
     (getf props prop)))
 
 (defun extend (base &rest props)
-  (let ((props (append `(:super ,(lambda (self) base)) props)))
+  (let ((props (append `(:super ,base) props)))
     (lambda (prop &optional (setter nil) (val nil))
       (when setter
         (setf (getf props prop) val))
@@ -31,3 +32,6 @@
 
 (defun call (obj f &rest args)
   (apply (apply obj `(,f)) (append `(,obj) args)))
+
+(defun super (obj)
+  (apply obj `(:super)))
