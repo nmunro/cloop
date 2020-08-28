@@ -71,6 +71,14 @@
            (o2 (extend o1 :name "Gary" :greeting "Hello!" :say-hi (lambda (this) (format nil "~A" (get-property this :greeting))))))
     (ok (string= (get-property (super o2) :name) "NMunro")))))
 
+(deftest test-inheritence-4
+  (testing "Object can extend from an extended object"
+    (let* ((o1 (build :name "NMunro" :age 33 :can-vote (lambda (this) (>= (get-property this :age) 18))))
+           (o2 (extend o1 :name "Gary" :greeting "Hello!" :say-hi (lambda (this) (format nil "~A" (get-property this :greeting)))))
+           (o3 (extend o2 :name "Bob")))
+    (ok (string= (get-property (super o3) :name) "Gary")))))
+
+
 (deftest test-methods-1
   (testing "Methods can be used via apply"
     (let ((person (build :name "Gary" :age 24 :can-vote (lambda (this) (>= (get-property this :age) 18)))))
