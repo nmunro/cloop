@@ -27,4 +27,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Test
-      run: sbcl --disable-debugger --load /usr/share/common-lisp/source/cl-asdf/asdf.lisp --quit --eval "(require 'asdf)(asdf:test-system :oop)"
+      run: sbcl --disable-debugger --load /usr/share/common-lisp/source/cl-asdf/asdf.lisp --quit --eval "(progn (require 'asdf)(asdf:test-system :oop))"
