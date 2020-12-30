@@ -26,7 +26,7 @@ jobs:
       run: ln -s $GITHUB_WORKSPACE /root/quicklisp/local-projects/cloop
       
     - name: Install test runner (rove)
-      run: sbcl --disable-debugger --eval "(progn (require 'asdf)(ql:quickload :rove)(exit))"
+      run: sbcl --disable-debugger --eval "(progn (require 'asdf)(require 'ql)(ql:quickload :rove)(exit))"
 
     # Runs a set of commands using the runners shell
     - name: Test
